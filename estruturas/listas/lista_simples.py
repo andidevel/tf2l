@@ -14,6 +14,21 @@ def add_item(name, root=None):
     }
 
 
+def add_item_no_recursion(name, root=None):
+    if root is None:
+        root = {
+            'Name': name,
+            'next': None
+        }
+        return root
+    while root.get('next') is not None:
+        root = root.get('next')
+    root['next'] = {
+        'Name': name,
+        'next': None
+    }
+
+
 def show_items(root):
     if root:
         print('[', end='')
@@ -33,4 +48,7 @@ if __name__ == '__main__':
     show_items(root)
     item = input('Novo item: ')
     add_item(item, root)
+    show_items(root)
+    print('Adicioando um item sem usar recursão => "E":')
+    add_item_no_recursion("E", root)
     show_items(root)
